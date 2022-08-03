@@ -141,6 +141,10 @@ input, select, textarea {
 			.img_size {
 				width: 70%;
 			}
+			
+			li {
+				text-align: left;
+		        }
 
 
 
