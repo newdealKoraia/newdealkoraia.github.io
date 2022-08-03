@@ -27,6 +27,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/count.css">
 </head>
 <body class="is-preload">
 
@@ -37,8 +38,18 @@
     <header id="header" class="alt">
         <span class="logo"><img src="images/logo.svg" alt=""/></span>
         <h1>서울형 인공지능 개발자 과정</h1>
-        <p>2022년 서울시 민간기업 맞춤형 뉴딜일자리<br>8월 10일까지 접수 중</p>
+        <p>2022년 서울시 민간기업 맞춤형 뉴딜일자리</p>
+        <div id="timer">
+            <div id="days"></div>
+            <div id="hours"></div>
+            <div id="minutes"></div>
+            <div id="seconds"></div>
+        </div>
     </header>
+
+
+
+    <h4 style="text-align: right">⚡ 8월 10일 수요일 오후 6시까지 등본 주소지가 서울이시라면, 신청 가능합니다!</h4>
 
     <!-- Nav -->
     <nav id="nav">
@@ -57,6 +68,8 @@
             <header class="major">
                 <p><img class="img_size" src="images/mozip.jpg" alt=""></p>
             </header>
+
+            <a href="https://github.com/newdealKoraia/newdealkoraia.github.io/raw/main/%5B%EC%B2%A8%EB%B6%801%5D2022%EB%85%84%202%EC%B0%A8%20%EB%AF%BC%EA%B0%84%EA%B8%B0%EC%97%85%20%EB%A7%9E%EC%B6%A4%ED%98%95%EC%82%AC%EC%97%85%20%ED%86%B5%ED%95%A9%EA%B3%B5%EA%B3%A0%EB%AC%B8.pdf" target="_blank"><img src="images/paper.png" alt=""><br>통합공고문 살펴보기</a>
         </section>
 
         <!-- Introduction -->
@@ -280,7 +293,8 @@
             <footer class="major">
                 <ul class="actions special">
                     <li><a href="https://koraia.org/chtml/board.php?template=bizdemo79551&com_board_basic=file_download&com_board_id=6&com_board_idx=420&com_board_file_seq=0" class="button primary">신청서 다운로드</a></li>
-                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdy0yrVNLzxWKPs2H4HnZV8RgZJYy2dAlbaqFaC911p2s64zg/viewform" class="button" target="_blank">접수 하기</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdy0yrVNLzxWKPs2H4HnZV8RgZJYy2dAlbaqFaC911p2s64zg/viewform" class="button" target="_blank">구글폼 접수 하기</a></li>
+
                 </ul>
             </footer>
         </section>
@@ -296,7 +310,50 @@
 
 </div>
 
+
 <!-- Scripts -->
+<!-- Channel Plugin Scripts -->
+<script>
+    (function() {
+        var w = window;
+        if (w.ChannelIO) {
+            return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+        }
+        var ch = function() {
+            ch.c(arguments);
+        };
+        ch.q = [];
+        ch.c = function(args) {
+            ch.q.push(args);
+        };
+        w.ChannelIO = ch;
+        function l() {
+            if (w.ChannelIOInitialized) {
+                return;
+            }
+            w.ChannelIOInitialized = true;
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+            s.charset = 'UTF-8';
+            var x = document.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s, x);
+        }
+        if (document.readyState === 'complete') {
+            l();
+        } else if (window.attachEvent) {
+            window.attachEvent('onload', l);
+        } else {
+            window.addEventListener('DOMContentLoaded', l, false);
+            window.addEventListener('load', l, false);
+        }
+    })();
+    ChannelIO('boot', {
+        "pluginKey": "8a5e9e07-a235-42d6-8a9a-24d4eca7cf0f"
+    });
+</script>
+<!-- End Channel Plugin -->
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
@@ -304,6 +361,35 @@
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+<script>
+    function makeTimer() {
+
+        var endTime = new Date("Aug 10, 2022 18:00:00");
+        var endTime = (Date.parse(endTime)) / 1000;
+
+        var now = new Date();
+        var now = (Date.parse(now) / 1000);
+
+        var timeLeft = endTime - now;
+
+        var days = Math.floor(timeLeft / 86400);
+        var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+        var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+        var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+
+        if (hours < "10") { hours = "0" + hours; }
+        if (minutes < "10") { minutes = "0" + minutes; }
+        if (seconds < "10") { seconds = "0" + seconds; }
+
+        $("#days").html(days + "<span>Days</span>");
+        $("#hours").html(hours + "<span>Hours</span>");
+        $("#minutes").html(minutes + "<span>Minutes</span>");
+        $("#seconds").html(seconds + "<span>Seconds</span>");
+
+    }
+
+    setInterval(function() { makeTimer(); }, 1000);
+</script>
 
 </body>
 </html>
