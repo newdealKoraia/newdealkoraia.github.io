@@ -352,6 +352,19 @@ input, select, textarea {
 
 /* Row */
 
+.highlight {
+    color: #ff6600;
+	font-size: 2em;
+  }
+
+  .header, .content, .footer {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
 	.row {
 		display: flex;
 		flex-wrap: wrap;
